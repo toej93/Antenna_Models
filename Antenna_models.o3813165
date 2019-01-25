@@ -1,0 +1,19 @@
+/users/PCON0003/cond0068
+root: can't figure out DISPLAY, set it manually
+In case you run a remote ssh session, restart your ssh session with:
+=========>  ssh -Y
+
+-----------------------
+Resources requested:
+nodes=1:ppn=2
+mem=64000mb
+-----------------------
+Resources used:
+cput=00:00:00
+walltime=00:00:03
+mem=0.000GB
+vmem=0.000GB
+-----------------------
+Resource units charged (estimate):
+0.001 RUs
+-----------------------

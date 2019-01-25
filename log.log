@@ -1,0 +1,275 @@
+
+Processing ariannaHeff.C...
+input_line_17:2:34: error: use of undeclared identifier 'wavelength'
+ new TComplex(TComplex(0., -2. * wavelength / z0 / v0))
+                                 ^
+input_line_17:2:47: error: use of undeclared identifier 'z0'
+ new TComplex(TComplex(0., -2. * wavelength / z0 / v0))
+                                              ^
+input_line_17:2:52: error: use of undeclared identifier 'v0'
+ new TComplex(TComplex(0., -2. * wavelength / z0 / v0))
+                                                   ^
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+done
+
+ *** Break *** segmentation violation
+
+
+
+===========================================================
+There was a crash.
+This is the entire stack trace of all threads:
+===========================================================
+#0  0x0000003f760ac82e in waitpid () from /lib64/libc.so.6
+#1  0x0000003f7603e479 in do_system () from /lib64/libc.so.6
+#2  0x00002b7cbcbb5b95 in TUnixSystem::StackTrace() () at /users/PAS0654/osu8354/root-6.12.06/core/unix/src/TUnixSystem.cxx:2412
+#3  0x00002b7cbcbb82bc in TUnixSystem::DispatchSignals(ESignals) () at /users/PAS0654/osu8354/root-6.12.06/core/unix/src/TUnixSystem.cxx:3643
+#4  <signal handler called>
+#5  0x0000000100000001 in ?? ()
+#6  0x00002b7cd1d47026 in ?? ()
+#7  0x00007ffd7709ac40 in ?? ()
+#8  0x00007ffd7709ac40 in ?? ()
+#9  0x00007ffd7709ab80 in ?? ()
+#10 0x00002b7cbedb5ec9 in cling::Interpreter::RunFunction(clang::FunctionDecl const*, cling::Value*) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#11 0x00002b7cbedb6990 in cling::Interpreter::EvaluateInternal(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, cling::CompilationOptions, cling::Value*, cling::Transaction**, unsigned long) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#12 0x00002b7cbedb6c2b in cling::Interpreter::execute(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#13 0x00002b7cbee4f09e in cling::runtime::internal::LifetimeHandler::~LifetimeHandler() () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#14 0x00002b7cbee0e82b in cling::IncrementalExecutor::runAndRemoveStaticDestructors(cling::Transaction*) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#15 0x00002b7cbedb712e in cling::Interpreter::runAndRemoveStaticDestructors() () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#16 0x00002b7cbed3cfcd in TCling::ResetGlobals() () at /users/PAS0654/osu8354/root-6.12.06/core/metacling/src/TCling.cxx:3225
+#17 0x00002b7cbca1dbf7 in TROOT::EndOfProcessCleanups() () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TROOT.cxx:1224
+#18 0x00002b7cbcbb29e1 in TUnixSystem::Exit(int, bool) () at /users/PAS0654/osu8354/root-6.12.06/core/unix/src/TUnixSystem.cxx:2153
+#19 0x00002b7cbca93d10 in TApplication::Terminate(int) () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TApplication.cxx:1233
+#20 0x00002b7cbc69fd06 in TRint::HandleTermInput() () at /users/PAS0654/osu8354/root-6.12.06/core/rint/src/TRint.cxx:570
+#21 0x00002b7cbcbb78e5 in TUnixSystem::CheckDescriptors() () at /users/PAS0654/osu8354/root-6.12.06/core/unix/src/TUnixSystem.cxx:1321
+#22 0x00002b7cbcbb89ea in TUnixSystem::DispatchOneEvent(bool) () at /users/PAS0654/osu8354/root-6.12.06/core/unix/src/TUnixSystem.cxx:1076
+#23 0x00002b7cbcaef276 in TSystem::InnerLoop() () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TSystem.cxx:411
+#24 0x00002b7cbcaf0130 in TSystem::Run() () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TSystem.cxx:361
+#25 0x00002b7cbca9064f in TApplication::Run(bool) () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TApplication.cxx:1159
+#26 0x00002b7cbc6a11e4 in TRint::Run(bool) () at /users/PAS0654/osu8354/root-6.12.06/core/rint/src/TRint.cxx:455
+#27 0x0000000000400f4c in main () at /users/PAS0654/osu8354/root-6.12.06/main/src/rmain.cxx:30
+===========================================================
+
+
+The lines below might hint at the cause of the crash.
+You may get help by asking at the ROOT forum http://root.cern.ch/forum.
+Only if you are really convinced it is a bug in ROOT then please submit a
+report at http://root.cern.ch/bugs. Please post the ENTIRE stack trace
+from above as an attachment in addition to anything else
+that might help us fixing this issue.
+===========================================================
+#5  0x0000000100000001 in ?? ()
+#6  0x00002b7cd1d47026 in ?? ()
+#7  0x00007ffd7709ac40 in ?? ()
+#8  0x00007ffd7709ac40 in ?? ()
+#9  0x00007ffd7709ab80 in ?? ()
+#10 0x00002b7cbedb5ec9 in cling::Interpreter::RunFunction(clang::FunctionDecl const*, cling::Value*) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#11 0x00002b7cbedb6990 in cling::Interpreter::EvaluateInternal(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, cling::CompilationOptions, cling::Value*, cling::Transaction**, unsigned long) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#12 0x00002b7cbedb6c2b in cling::Interpreter::execute(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#13 0x00002b7cbee4f09e in cling::runtime::internal::LifetimeHandler::~LifetimeHandler() () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#14 0x00002b7cbee0e82b in cling::IncrementalExecutor::runAndRemoveStaticDestructors(cling::Transaction*) () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#15 0x00002b7cbedb712e in cling::Interpreter::runAndRemoveStaticDestructors() () from /users/PAS0654/osu8354/root_build/lib/libCling.so
+#16 0x00002b7cbed3cfcd in TCling::ResetGlobals() () at /users/PAS0654/osu8354/root-6.12.06/core/metacling/src/TCling.cxx:3225
+#17 0x00002b7cbca1dbf7 in TROOT::EndOfProcessCleanups() () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TROOT.cxx:1224
+#18 0x00002b7cbcbb29e1 in TUnixSystem::Exit(int, bool) () at /users/PAS0654/osu8354/root-6.12.06/core/unix/src/TUnixSystem.cxx:2153
+#19 0x00002b7cbca93d10 in TApplication::Terminate(int) () at /users/PAS0654/osu8354/root-6.12.06/core/base/src/TApplication.cxx:1233
+===========================================================
+
+

@@ -1,0 +1,98 @@
+{
+	int N = 239;
+	TFile *ariannaAntennaFile = new TFile("WIPLD_antennamodel_firn.root");
+	TTree *AntTree = (TTree*)ariannaAntennaFile->Get("AntTree");
+	TTree *ZTree = (TTree*)ariannaAntennaFile->Get("ZTree");
+	
+	float freq[N];
+	double gains[N];
+	double v_re_phi[N];
+	double v_im_phi[N];
+	double v_re_theta[N];
+	double v_im_theta[N];
+	double thetas[N];
+	double phis[N];
+	double z_re[N];
+	double z_im[N];
+	TComplex V_theta[N];
+	TComplex V_phi[N];
+	TComplex Z[N];
+	TComplex h_theta[N];
+	TComplex h_phi[N];	
+	float h_phi_re[N];
+	float h_phi_im[N];
+	float h_theta_re[N];
+	float h_theta_im[N];
+	float h_phi_mag[N];
+	float h_phi_phase[N];
+	float h_theta_mag[N];
+	float h_theta_phase[N];
+	float Z_mag[N];
+	float V_theta_mag[N];
+	float V_theta_phase[N];
+	float V_phi_mag[N];
+	float V_phi_phase[N];
+	float A_eff_theta[N];
+	float A_eff_phi[N];
+	float G_theta[N];
+	float G_phi[N];
+
+	float pi = TMath::Pi();
+
+	AntTree->SetBranchAddress("frequencies", &freq);
+	AntTree->SetBranchAddress("gains", gains);
+	AntTree->SetBranchAddress("Re_phi", v_re_phi);
+	AntTree->SetBranchAddress("Im_phi", v_im_phi);
+	AntTree->SetBranchAddress("Re_theta", v_re_theta);
+	AntTree->SetBranchAddress("Im_theta", v_im_theta);
+	AntTree->BuildIndex("thetas","phis");
+	ZTree->SetBranchAddress("Im_Z", z_im);
+	ZTree->SetBranchAddress("Re_Z", z_re);
+	ZTree->GetEntry(0);
+	for(int i=1; i<N; i++) Z[i] = TComplex(z_re[i], z_im[i]);
+
+	double z0 = 377.0;
+	double v0 = 1.0;
+	FILE *fout = fopen("Arianna_WIPLD_hpol2.dat", "w");
+	for(int i=1;i<N;i++)
+	{
+		std::cout<<i<<"th Frequency of "<<N<<std::endl;
+		double wavelength = 0.299792/((double)freq[i]);
+		TComplex norm(0.0,-2.0*wavelength/z0/v0);
+		h_phi_re[i] = 0.0;
+		h_phi_im[i] = 0.0;
+		h_theta_re[i] = 0.0;
+		h_theta_im[i] = 0.0;
+		fprintf(fout, "freq : %3.2f MHz\n", freq[i]*1000.);
+		fprintf(fout, "SWR : %f\n", 2-0.002*i);
+		fprintf(fout, " Theta \t Phi \t Gain(dB)     \t   Gain     \t    Phase(deg)\n");
+		for(int p=-90;p<=90;p+=5)
+		{
+			for(int t=-90;t<=265;t+=5)
+			{
+				Int_t en = AntTree->GetEntryNumberWithIndex(t,p);
+				AntTree->GetEntry(en);
+				V_theta[i] = TComplex(v_re_theta[i],v_im_theta[i]);
+				V_phi[i] = TComplex(v_re_phi[i], v_im_phi[i]);
+				h_theta[i] = norm*Z[i]*V_theta[i];
+				h_phi[i] = norm*Z[i]*V_phi[i];
+				h_theta_re[i] = (float)h_theta[i].Re();
+				h_theta_im[i] = (float)h_theta[i].Im();
+				h_theta_mag[i] = (float)TComplex::Abs(h_theta[i]);
+				h_theta_phase[i] = (float)h_theta[i].Theta();
+				// std::cout<<"integer Frequency h_theta_re h_theta_im h_theta_phase"<<std::endl;
+				// std::cout<<i<<" "<<freq[i]<<" "<<h_theta_re[i]<<" "<<h_theta_im[i]<<" "<<h_theta_phase[i]*TMath::RadToDeg()<<std::endl;
+				// h_phi_re[i] = (float)h_phi[i].Re();
+				// h_phi_im[i] = (float)h_phi[i].Im();
+				// h_phi_mag[i] = (float)TComplex::Abs(h_phi[i]);
+				// h_phi_phase[i] = (float)h_phi[i].Theta();
+				fprintf(fout, "%d \t %d \t %2.2f     \t   %2.2f     \t    %3.2f\n", p, t+90, 10.*TMath::Log10(gains[i]), gains[i],  h_theta_phase[i]*TMath::RadToDeg() ); 
+			}
+		}
+		std::cout << i  << std::endl;
+		
+	}
+	fclose(fout);
+	std::cout << "done" << std::endl;
+}
+
